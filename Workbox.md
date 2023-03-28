@@ -3,7 +3,7 @@ FLORENT Victor
 # Workbox
  
 ## 1) Liste des fonctionnalités offertes
-WorkBox permet de simplifier le développement de fonctionnalités fréquentes pour le service worker, tel que le routing ou l'utilisation du cache.
+WorkBox est une collection de librairies (nommées modules) permettant de simplifier le développement de fonctionnalités fréquentes pour le service worker, tel que le routing ou l'utilisation du cache.
 <ul>
 <li>workbox-routing permet de passer d'une page à une autre en fonction du chemin URL donné. Il peut aussi rediriger vers une page par défaut en cas de chemin invalide.</li>
 <li>Workox peut mettre des pages en cache, ce qui permet de ne pas avoir à redemander au serveur web des éléments pour afficher une page déjà visitée.</li>
@@ -12,6 +12,7 @@ WorkBox permet de simplifier le développement de fonctionnalités fréquentes p
 <li>Le precaching permet de mettre en cache toute information avant même d'utiliser le service worker. Cela permet d'avoir accès à des pages qui seront utilisées communément, même hors ligne.</li>
 <li>Workbox possède un wizard permettant de configurer le service worker de manière simple et personnalisée.</li>
 <li>workbox-recipes permet de simplifier le travail du développeur à l'aide de méthodes regroupant des fonctionnalités très fréquentes, comme mettre en cache une page, en utilisant une seule ligne de code.</li>
+<li>workbox-window aide le développeur à utiliser le service worker de manière optimale, et ce le long de son cycle de vie.</li>
 </ul>
 
 ## 2) Méthodes de cache et utilisations possibles
@@ -22,24 +23,24 @@ Avec cette stratégie, c'est le serveur web qui est interrogé en premier. Dans 
 ### Stale-While-Revalidate
 Cette stratégie utilise d'abord le cache pour afficher la fenêtre, puis fait une requête au serveur afin de mettre à jour le cache <em>pour la prochaine fois</em>. Cela permet de rester performant tout en restant à jour pour la prochaine fois (si c'est une nécessité absolue, on peut recharger la page, et donc récupérer le nouveau cache).
 ### NetworkOnly
-Avec cette stratégie, aucun cache n'est utilisé et nous passons directement sur le serveur. Cela est à utiliser dans le cas où les données récupérées changent en permanence et que les garder en cache n'apporte pas beaucoup d'utilité.
+Avec cette stratégie, aucun cache n'est utilisé et nous passons directement sur le serveur. Cela est à utiliser dans le cas où les données récupérées changent en permanence et que les garder en cache n'est pas utile.
 ### CacheOnly
-Cette stratégie n'utilise que les données se trouvant en cache. Elle est utile quand nous voulons récupérer des données déjà mises en cache (récupérés d'une autre manière à un autre moment)
+Cette stratégie n'utilise que les données se trouvant en cache. Elle est utile quand nous voulons récupérer des données déjà mises en cache (récupérés d'une autre manière à un autre moment).
 
 ## 3) Use cases à intégrer dans le projet doctoliberal
 ### Liste des docteurs disponibles : <em>CacheFirst</em>
 La liste des docteurs avec lequel on peut prendre rendez-vous ne risque pas de constamment changer. 
 ### Liste des rendez-vous pour un docteur : <em>NetworkFirst</em>
 Pour un docteur, il est essentiel d'être toujours à jour au niveau de ses rendez-vous. Cependant, lorsqu'il est en déplacement, il vaut tout de même mieux avoir la liste des destinations à portée de main, même hors ligne : l'utilisation du cache est alors primordiale.
-### Liste des rendez-vous pour un client : <em>CacheFirst</em>
+### Liste des rendez-vous pour un client : <em>Stale-While-Revalidate</em>
 Contrairement aux docteurs, le patient n'a pas vraiment besoin de requêter le serveur web pour être toujours à jour : lui-même crée ses rendez-vous, et dans le cas où un docteur doit le décaler, il recevra un mail de ce-dernier le prévenant.
 ### Routing
 On aurait pu utiliser WorkBox pour s'occuper du routing plutôt que d'utiliser le package react-router-dom. Cela reste une question de préférence du développeur car les deux options semblent posséder les mêmes fonctionnalités.
 
 # Page d'incitation à l'installation de PWA
 
-## 1 ) Créer un composant React pour inciter et surtout guider un utilisateur à installer la PWA
+## 1) Créer un composant React pour inciter et surtout guider un utilisateur à installer la PWA
 Voir app.jsx et images associées. Les captures d'écran <em>VisuelPWA(In/disponible)</em> représentent à quoi la page ressemble pour un utilisateur qui ne peut pas/peut installer la PWA.
 
-## 2 ) Expliquer en quoi il serait intéressant de mettre en place une telle page
-L'utilisation d'une telle page PWA est intéressante car elle permet à l'utilisateur de pouvoir accéder directement sur la web app sans avoir à passer sur un navigateur web. Les fonctionnalités PWA permettent d'accéder aux composants du périphérique utilisé de manière aisé (notification, gyroscope, bluetooth). Cependant, la compatibilité de cette appli varie grandement entre les différents systèmes d'exploitation et navigateurs web.
+## 2) Expliquer en quoi il serait intéressant de mettre en place une telle page
+L'utilisation d'une telle page PWA est intéressante car elle permet à l'utilisateur de pouvoir accéder directement sur la web app sans avoir à passer sur un navigateur web. Les fonctionnalités PWA permettent d'accéder aux composants du périphérique utilisé de manière aisé (notification, gyroscope, Bluetooth). Cependant, la compatibilité de cette appli varie grandement entre les différents systèmes d'exploitation et navigateurs web.

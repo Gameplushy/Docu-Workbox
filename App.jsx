@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
   var installer = null
-  const [isVisible, changeVisibility] = useState(false)
+  const [isVisible, changeVisibility] = useState(true)
 
   window.addEventListener('beforeinstallprompt', (e) => {
     changeVisibility(true)
@@ -66,7 +66,7 @@ function App() {
       {isVisible ? 
       <div>
         <button className="PWAButton" onClick={GetPWA}>Installez la PWA ici!</button>
-        <p>Cliquez sur ce bouton (ou cliquez sur l'icone se trouvant en haut de votre barre de recherche) et accédez à ce site en un clic sur votre bureau !</p>
+        <p>Cliquez sur ce bouton (ou cliquez sur l'icône se trouvant en haut de votre barre de recherche) et accédez à ce site en un clic sur votre bureau !</p>
         <img src="icon.png"/>
         <p>Il ne vous reste plus qu'à valider la pop-up et le tour est joué !</p>
         <img src="explainChrome.png"/>
@@ -77,7 +77,7 @@ function App() {
       <p>Afin de pouvoir profiter au maximum des fonctionnalités de ce site, utilisez le navigateur web Chrome (pour utilisateurs Windows/Android) ou Safari (pour utilisateurs Mac/iOS)</p>
       <p>Cela vous permettra de :</p>
       <ul>
-        <li>Recevoir <a onClick={ClickNotif}>des noitifcations push !</a></li>
+        <li>Recevoir <a onClick={ClickNotif}>des notifcations push !</a></li>
         <li>Connaître <a onClick={GetPosition}>votre position !</a> : {pos}</li>
         <li>Utilisez le NFC de votre mobile !</li>
         <li>Connectez-vous au Bluetooth d'un de vos appareils !</li>
