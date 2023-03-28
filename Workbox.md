@@ -20,7 +20,7 @@ Avec cette stratégie, le service worker regarde d'abord si la page demandée se
 ### NetworkFirst
 Avec cette stratégie, c'est le serveur web qui est interrogé en premier. Dans le cas d'un échec, on récupère alors la page dans notre cache, si ce-dernier la possède. Cette stratégie est moins rapide, mais elle permet d'être toujours à jour. Et dans le cas où le serveur est indisponible, nous avons tout de même de quoi retourner sur quelque chose (si nous avons déjà utilisé le site)
 ### Stale-While-Revalidate
-Cette stratégie utilise d'abord le cache pour afficher la fenêtre, puis fait une requête au serveur afin de mettre à jour le cache <em>pour la prochaine fois</em>.
+Cette stratégie utilise d'abord le cache pour afficher la fenêtre, puis fait une requête au serveur afin de mettre à jour le cache <em>pour la prochaine fois</em>. Cela permet de rester performant tout en restant à jour pour la prochaine fois (si c'est une nécessité absolue, on peut recharger la page, et donc récupérer le nouveau cache).
 ### NetworkOnly
 Avec cette stratégie, aucun cache n'est utilisé et nous passons directement sur le serveur. Cela est à utiliser dans le cas où les données récupérées changent en permanence et que les garder en cache n'apporte pas beaucoup d'utilité.
 ### CacheOnly
@@ -34,12 +34,12 @@ Pour un docteur, il est essentiel d'être toujours à jour au niveau de ses rend
 ### Liste des rendez-vous pour un client : <em>CacheFirst</em>
 Contrairement aux docteurs, le patient n'a pas vraiment besoin de requêter le serveur web pour être toujours à jour : lui-même crée ses rendez-vous, et dans le cas où un docteur doit le décaler, il recevra un mail de ce-dernier le prévenant.
 ### Routing
-On aurait pu utiliser WorkBox pour s'occuper du routing plutôt que d'utiliser le package react-router-dom. Cela reste une question de préférence.
+On aurait pu utiliser WorkBox pour s'occuper du routing plutôt que d'utiliser le package react-router-dom. Cela reste une question de préférence du développeur car les deux options semblent posséder les mêmes fonctionnalités.
 
 # Page d'incitation à l'installation de PWA
 
 ## 1 ) Créer un composant React pour inciter et surtout guider un utilisateur à installer la PWA
-Voir app.jsx
+Voir app.jsx et images associées. Les captures d'écran <em>VisuelPWA(In/disponible)</em> représentent à quoi la page ressemble pour un utilisateur qui ne peut pas/peut installer la PWA.
 
 ## 2 ) Expliquer en quoi il serait intéressant de mettre en place une telle page
-L'utilisation d'une telle page PWA est intéressante car elle permet à l'utilisateur de pouvoir accéder directement sur la web app sans avoir à passer sur un navigateur web.
+L'utilisation d'une telle page PWA est intéressante car elle permet à l'utilisateur de pouvoir accéder directement sur la web app sans avoir à passer sur un navigateur web. Les fonctionnalités PWA permettent d'accéder aux composants du périphérique utilisé de manière aisé (notification, gyroscope, bluetooth). Cependant, la compatibilité de cette appli varie grandement entre les différents systèmes d'exploitation et navigateurs web.
